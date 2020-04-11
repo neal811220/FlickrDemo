@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		1804F58124419D510016879B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1804F58024419D510016879B /* AppDelegate.swift */; };
-		1804F58324419D510016879B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1804F58224419D510016879B /* SceneDelegate.swift */; };
-		1804F58524419D510016879B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1804F58424419D510016879B /* ViewController.swift */; };
-		1804F58824419D510016879B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1804F58624419D510016879B /* Main.storyboard */; };
+		1804F58524419D510016879B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1804F58424419D510016879B /* SearchViewController.swift */; };
 		1804F58A24419D520016879B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1804F58924419D520016879B /* Assets.xcassets */; };
 		1804F58D24419D520016879B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1804F58B24419D520016879B /* LaunchScreen.storyboard */; };
+		1804F5952441A0920016879B /* NATabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1804F5942441A0920016879B /* NATabbarViewController.swift */; };
+		1804F59C2441A6AE0016879B /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1804F59B2441A6AE0016879B /* FavoriteViewController.swift */; };
+		1804F59E2441A7750016879B /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1804F59D2441A7750016879B /* UIImage+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1804F57D24419D510016879B /* FlickrDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1804F58024419D510016879B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1804F58224419D510016879B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1804F58424419D510016879B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		1804F58724419D510016879B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1804F58424419D510016879B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		1804F58924419D520016879B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1804F58C24419D520016879B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1804F58E24419D520016879B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1804F5942441A0920016879B /* NATabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NATabbarViewController.swift; sourceTree = "<group>"; };
+		1804F59B2441A6AE0016879B /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		1804F59D2441A7750016879B /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,14 +59,55 @@
 			isa = PBXGroup;
 			children = (
 				1804F58024419D510016879B /* AppDelegate.swift */,
-				1804F58224419D510016879B /* SceneDelegate.swift */,
-				1804F58424419D510016879B /* ViewController.swift */,
-				1804F58624419D510016879B /* Main.storyboard */,
-				1804F58924419D520016879B /* Assets.xcassets */,
-				1804F58B24419D520016879B /* LaunchScreen.storyboard */,
+				1804F59A2441A0EC0016879B /* Extension */,
+				1804F5992441A0DC0016879B /* Resource */,
+				1804F5982441A0B10016879B /* Model */,
+				1804F5972441A0AB0016879B /* View */,
+				1804F5962441A0980016879B /* Controller */,
 				1804F58E24419D520016879B /* Info.plist */,
 			);
 			path = FlickrDemo;
+			sourceTree = "<group>";
+		};
+		1804F5962441A0980016879B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1804F5942441A0920016879B /* NATabbarViewController.swift */,
+				1804F59B2441A6AE0016879B /* FavoriteViewController.swift */,
+				1804F58424419D510016879B /* SearchViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1804F5972441A0AB0016879B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1804F58B24419D520016879B /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1804F5982441A0B10016879B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1804F5992441A0DC0016879B /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				1804F58924419D520016879B /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		1804F59A2441A0EC0016879B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1804F59D2441A7750016879B /* UIImage+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +170,6 @@
 			files = (
 				1804F58D24419D520016879B /* LaunchScreen.storyboard in Resources */,
 				1804F58A24419D520016879B /* Assets.xcassets in Resources */,
-				1804F58824419D510016879B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +180,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1804F58524419D510016879B /* ViewController.swift in Sources */,
+				1804F59E2441A7750016879B /* UIImage+Extension.swift in Sources */,
+				1804F58524419D510016879B /* SearchViewController.swift in Sources */,
+				1804F5952441A0920016879B /* NATabbarViewController.swift in Sources */,
+				1804F59C2441A6AE0016879B /* FavoriteViewController.swift in Sources */,
 				1804F58124419D510016879B /* AppDelegate.swift in Sources */,
-				1804F58324419D510016879B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1804F58624419D510016879B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1804F58724419D510016879B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		1804F58B24419D520016879B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
