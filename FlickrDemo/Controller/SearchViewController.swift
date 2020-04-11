@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor.white
+        
+        navigationItem.title = "搜尋輸入頁"
     }
-
 
 }
 
