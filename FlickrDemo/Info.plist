@@ -39,5 +39,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>FlickrURL</key>
+	<string>https://www.flickr.com/services/rest/?method=flickr.photos.search&amp;api_key=587a8d3c5d7894324337cd91de702489</string>
 </dict>
 </plist>
