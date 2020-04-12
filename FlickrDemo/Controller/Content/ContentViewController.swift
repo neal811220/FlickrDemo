@@ -18,7 +18,7 @@ class ContentViewController: UIViewController {
         
         flowLayout.scrollDirection = .vertical
         
-        collectionView.registerContentCollectionViewCell(collectionView: collectionView)
+        collectionView.registerCustomCollectionViewCell(collectionView: collectionView)
         
         collectionView.backgroundColor = UIColor.white
         
@@ -31,20 +31,37 @@ class ContentViewController: UIViewController {
     
     let flickrProvider = FlickrProvider()
     
+    var inputText = ""
+    
+    var searchCount = ""
+        
+    var datas: [PhotoDetail] = [] {
+        
+        didSet {
+            
+            DispatchQueue.main.async {
+                
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    var page = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
+        
+        navigationItem.title = "搜尋結果"
         
         setupCollectionView()
         
         fetchFlickrData()
     }
     
-    let cells: [ContentCollectionViewCellDatasource] = [ContentCollectionViewCellModel()]
-    
-    let datas: [Any] = []
-    
+    let cells: [CustomCollectionViewCellDatasource] = [ContentCollectionViewCellModel()]
+        
     func setupCollectionView() {
         
         view.addSubview(collectionView)
@@ -62,15 +79,21 @@ class ContentViewController: UIViewController {
     }
     
     func fetchFlickrData() {
-        
-        flickrProvider.fetchFlickrData(text: "apple", count: 10) { (result) in
+        print("FetchPage==>>\(page)")
+        flickrProvider.fetchFlickrData(text: inputText, count: searchCount, page: page) { [weak self] (result) in
+            
+            guard let strongSelf = self else {
+                
+                return
+            }
             
             switch result {
                 
             case .success:
                 
-                print("111")
+                strongSelf.datas = FlickrDataManager.shared.flickrData
                 
+                print(strongSelf.datas.count)
             case .failure(let error):
                 
                 print(error)
@@ -82,31 +105,48 @@ class ContentViewController: UIViewController {
 extension ContentViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        
+        return datas.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+                
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cells[0].identifier, for: indexPath)
-        
-        cells[0].setCell(collectionViewCell: cell, contentData: datas)
+
+        cells[0].setCell(collectionViewCell: cell, contentData: datas, indexPath: indexPath)
         
         return cell
     }
 
 }
 
+extension ContentViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        print("indexpath==>\(indexPath.row)")
+//        print("datas==>\(datas.count - 1)")
+//        print(page)
+        if indexPath.row == datas.count - 1 {
+
+            page += 1
+
+            fetchFlickrData()
+        }
+        
+    }
+}
+
 extension ContentViewController: UICollectionViewDelegateFlowLayout {
 
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width / 2 - 15, height: view.frame.width / 2 - 15)
+    return CGSize(width: view.frame.width / 2 - 15, height: view.frame.width / 2 - 15)
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

@@ -18,7 +18,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         
         stackView.distribution = UIStackView.Distribution.fillEqually
         
-        stackView.spacing = 40
+        stackView.spacing = UIScreen.main.bounds.width / 14
         
         return stackView
     }()
@@ -138,6 +138,15 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     @objc func tapSearchButton(sender: UIButton) {
         
         let contentVC = ContentViewController()
+        
+        guard let input = contentTextField.text, let count = contentCountTextField.text else {
+            
+            return
+        }
+        
+        contentVC.inputText = input
+        
+        contentVC.searchCount = count
         
         show(contentVC, sender: nil)
     }

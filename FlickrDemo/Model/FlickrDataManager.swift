@@ -14,5 +14,5 @@ class FlickrDataManager {
     
     private init() {}
     
-    var flickrData: Datas?
+    var flickrData: [PhotoDetail] = []
 }

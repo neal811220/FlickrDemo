@@ -11,8 +11,10 @@ import UIKit
 
 extension UICollectionView {
     
-    func registerContentCollectionViewCell(collectionView: UICollectionView) {
+    func registerCustomCollectionViewCell(collectionView: UICollectionView) {
         
-        collectionView.register(ContentCollectionViewCell.self, forCellWithReuseIdentifier: ContentCollectionViewCell.identifier)
+        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.identifier)
+        
     }
+    
 }

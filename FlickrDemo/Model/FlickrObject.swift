@@ -25,10 +25,10 @@ struct Photos: Codable {
     
     let total: String
     
-    let photo: [photoDetail]
+    let photo: [PhotoDetail]
 }
 
-struct photoDetail: Codable {
+struct PhotoDetail: Codable {
     
     let id: String
     
@@ -47,4 +47,9 @@ struct photoDetail: Codable {
     let isfriend: Int
     
     let isfamily: Int
+    
+    var imageUrl: String {
+        
+        return "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_m.jpg"
+    }
 }

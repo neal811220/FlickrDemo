@@ -10,7 +10,7 @@ import Foundation
 
 enum FlickrRequest: NARequest {
     
-    case fetchPhotos(text: String, count: Int)
+    case fetchPhotos(text: String, count: String, page: Int)
     
     var headers: [String : String] {
         
@@ -50,9 +50,9 @@ enum FlickrRequest: NARequest {
         
         switch self {
             
-        case .fetchPhotos(let text, let count):
+        case .fetchPhotos(let text, let count, let page):
             
-            return "&text=\(text)&per_page=\(count)&format=json&nojsoncallback=1"
+            return "&text=\(text)&per_page=\(count)&page=\(page)&format=json&nojsoncallback=1"
             
         }
     }

@@ -18,6 +18,8 @@ enum ImageAsset: String {
     case Icons_32px_Search_Normal
     
     case Icons_32px_Search_Selected
+    
+    case Icons_32px_Loading
 }
 
 extension UIImage {

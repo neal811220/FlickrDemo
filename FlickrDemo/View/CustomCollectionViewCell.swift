@@ -8,13 +8,13 @@
 
 import UIKit
 
-class ContentCollectionViewCell: UICollectionViewCell {
+class CustomCollectionViewCell: UICollectionViewCell {
     
     let contentImageView: UIImageView = {
         
         let imageView = UIImageView()
         
-        imageView.image = UIImage.asset(.Icons_32px_favorite_selected)
+        imageView.image = UIImage.asset(.Icons_32px_Loading)
         
         return imageView
     }()
@@ -28,12 +28,33 @@ class ContentCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    let favoriteButton: UIButton = {
+        
+        let button = UIButton()
+        
+        button.backgroundColor = UIColor.blue
+        
+        button.setTitle("收藏", for: .normal)
+        
+        button.setTitleColor(UIColor.white, for: .normal)
+        
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupImageView()
         
         setupTitleLable()
+        
+        setupFavoriteButton()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.contentImageView.image = nil
     }
     
     required init?(coder: NSCoder) {
@@ -49,12 +70,13 @@ class ContentCollectionViewCell: UICollectionViewCell {
         contentImageView.anchor(
             
             top: self.topAnchor,
-            
+                        
             left: self.leftAnchor,
             
             right: self.rightAnchor,
             
             height: self.frame.height / 3 * 2
+            
         )
     }
     
@@ -64,13 +86,30 @@ class ContentCollectionViewCell: UICollectionViewCell {
         
         titleLabel.anchor(
             
-            bottom: self.bottomAnchor,
+            top: contentImageView.bottomAnchor,
+                        
+            left: self.leftAnchor,
+            
+            right: self.rightAnchor
+                        
+        )
+    }
+    
+    func setupFavoriteButton() {
+        
+        self.addSubview(favoriteButton)
+        
+        favoriteButton.anchor(
+            
+            top: titleLabel.bottomAnchor,
             
             left: self.leftAnchor,
             
             right: self.rightAnchor,
             
-            paddingBottom: 10
+            height: 30
         )
+        
+//        favoriteButton.layer.cornerRadius = 10
     }
 }
