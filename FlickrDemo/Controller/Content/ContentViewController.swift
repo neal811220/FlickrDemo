@@ -60,7 +60,7 @@ class ContentViewController: UIViewController {
         fetchFlickrData()
     }
     
-    let cells: [CustomCollectionViewCellDatasource] = [ContentCollectionViewCellModel()]
+    var cellModel = ContentCollectionViewCellModel()
         
     func setupCollectionView() {
         
@@ -79,7 +79,7 @@ class ContentViewController: UIViewController {
     }
     
     func fetchFlickrData() {
-        print("FetchPage==>>\(page)")
+
         flickrProvider.fetchFlickrData(text: inputText, count: searchCount, page: page) { [weak self] (result) in
             
             guard let strongSelf = self else {
@@ -111,9 +111,23 @@ extension ContentViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
                 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cells[0].identifier, for: indexPath)
-
-        cells[0].setCell(collectionViewCell: cell, contentData: datas, indexPath: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellModel.identifier, for: indexPath)
+        
+        cellModel.setCell(collectionViewCell: cell, contentData: datas, indexPath: indexPath)
+        
+        cellModel.passTapButton = { [weak self] in
+            
+            let indexPath = collectionView.indexPath(for: $0)
+            
+            guard let currentindexPath = indexPath else {
+                
+                return
+            }
+            
+            StorageManager.shared.insertFavoriteData(title: self?.datas[currentindexPath.row].title ?? "", imageURL: self?.datas[currentindexPath.row].imageUrl ?? "")
+            
+            NotificationCenter.default.post(name: Notification.Name("addFavorite"), object: nil)
+        }
         
         return cell
     }
@@ -123,9 +137,7 @@ extension ContentViewController: UICollectionViewDataSource {
 extension ContentViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        print("indexpath==>\(indexPath.row)")
-//        print("datas==>\(datas.count - 1)")
-//        print(page)
+
         if indexPath.row == datas.count - 1 {
 
             page += 1

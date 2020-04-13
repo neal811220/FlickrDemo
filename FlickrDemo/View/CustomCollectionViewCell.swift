@@ -37,10 +37,16 @@ class CustomCollectionViewCell: UICollectionViewCell {
         button.setTitle("收藏", for: .normal)
         
         button.setTitleColor(UIColor.white, for: .normal)
+                
+        button.isEnabled = true
         
         return button
     }()
     
+    var passTapFavoriteButton: ((UICollectionViewCell) -> Void)?
+    
+    var buttonHeight: CGFloat = 30
+                
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -66,7 +72,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     func setupImageView() {
         
         self.addSubview(contentImageView)
-        
+                
         contentImageView.anchor(
             
             top: self.topAnchor,
@@ -76,7 +82,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
             right: self.rightAnchor,
             
             height: self.frame.height / 3 * 2
-            
         )
     }
     
@@ -107,9 +112,14 @@ class CustomCollectionViewCell: UICollectionViewCell {
             
             right: self.rightAnchor,
             
-            height: 30
+            height: buttonHeight
         )
         
-//        favoriteButton.layer.cornerRadius = 10
+        favoriteButton.addTarget(self, action: #selector(tapFavoriteButtonHandler), for: .touchUpInside)
+    }
+    
+    @objc func tapFavoriteButtonHandler() {
+        
+        passTapFavoriteButton?(self)
     }
 }

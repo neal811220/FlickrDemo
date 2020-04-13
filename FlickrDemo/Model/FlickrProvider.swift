@@ -40,7 +40,7 @@ class FlickrProvider {
         }
     }
     
-     func imageURLTransformImage(paging: Int, photoURLString: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
+     func imageURLTransformImage(photoURLString: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
             
             guard let imageURL = URL(string: photoURLString) else {
                 
@@ -49,26 +49,6 @@ class FlickrProvider {
             }
             
             let imageCache = NSCache<NSURL, UIImage>()
-            
-//            if PhotoDataManager.shared.photos.count - paging <= 50 && PhotoDataManager.shared.isFetchAll == false {
-//
-//                for index in PhotoDataManager.shared.currentPhotos.count ..< PhotoDataManager.shared.photos.count - 1 {
-//
-//                    PhotoDataManager.shared.currentPhotos.append(PhotoDataManager.shared.photos[index])
-//
-//                }
-//
-//                PhotoDataManager.shared.isFetchAll = true
-//            }
-//
-//            if paging > PhotoDataManager.shared.currentPhotos.count - 10 && PhotoDataManager.shared.isFetchAll == false {
-//
-//                for index in PhotoDataManager.shared.currentPhotos.count ..< PhotoDataManager.shared.currentPhotos.count + 30 {
-//
-//                    PhotoDataManager.shared.currentPhotos.append(PhotoDataManager.shared.photos[index])
-//
-//                }
-//            }
             
             if let image = imageCache.object(forKey: imageURL as NSURL) {
                 
