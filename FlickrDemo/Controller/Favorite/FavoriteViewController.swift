@@ -31,9 +31,9 @@ class FavoriteViewController: UIViewController {
     
     let flickrProvider = FlickrProvider()
     
-    let cells: [CustomCollectionViewCellDatasource] = [FavoriteCollectionViewCellModel()]
+    var cellModel = FavoriteCollectionViewCellModel()
     
-    let datas: [PhotoDetail] = []
+    var datas: [Favorites] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,11 @@ class FavoriteViewController: UIViewController {
         
         navigationItem.title = "我的最愛"
         
-//        setupCollectionView()
+        NotificationCenter.default.addObserver(self, selector: #selector(addFavorite), name: Notification.Name("addFavorite"), object: nil)
+        
+        setupCollectionView()
+        
+        addFavorite()
     }
     
     func setupCollectionView() {
@@ -61,6 +65,13 @@ class FavoriteViewController: UIViewController {
         )
     }
     
+    @objc func addFavorite() {
+        
+        datas = StorageManager.shared.fetchCartData()
+        
+        collectionView.reloadData()
+    }
+    
 }
 
 extension FavoriteViewController: UICollectionViewDataSource {
@@ -72,9 +83,9 @@ extension FavoriteViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cells[0].identifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellModel.identifier, for: indexPath)
         
-        cells[0].setCell(collectionViewCell: cell, contentData: datas, indexPath: indexPath)
+        cellModel.setCell(collectionViewCell: cell, contentData: datas, indexPath: indexPath)
         
         return cell
     }
